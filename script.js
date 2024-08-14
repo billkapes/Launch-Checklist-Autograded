@@ -25,7 +25,7 @@ window.addEventListener("load", function() {
         let list = document.getElementById("faultyItems");
         if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === "") {
             alert("All fields required.")
-            event.preventDefault();
+            //event.preventDefault();
         }
 
         formSubmission(document, list, pilotNameInput.value, copilotNameInput.value, fuelLevelInput.value, cargoMassInput.value);

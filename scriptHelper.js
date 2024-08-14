@@ -28,22 +28,49 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-    // if (validateInput(pilot) === "Not a Number") {
-    //     //set pilot
-    // } else {
-    //     //set bad pilot
-    // }
-    // if (validateInput(copilot) === "Not a Number") {
-    //     //set copilot
-    // } else {
-    //     //set bad copilot
-    // }
-    // if (validateInput(fuelLevel) === "Is a Number") {
-    //     //set fuel
-    // } else {
-    //     //set bad fuel
-    // }
-    //list.style.visibility = "visible";
+    let faultFlag = false;
+    if (validateInput(pilot) === "Not a Number") {
+        document.getElementById("pilotStatus").innerHTML = `Pilot ${pilot} is ready for launch`;
+    } else {
+        //set bad pilot
+    }
+
+    if (validateInput(copilot) === "Not a Number") {
+        document.getElementById("copilotStatus").innerHTML = `Co-pilot ${copilot} is ready for launch`;
+
+    } else {
+        //set bad copilot
+    }
+
+    if (validateInput(fuelLevel) === "Is a Number") {
+        if (fuelLevel < 10000) {
+            document.getElementById("fuelStatus").innerHTML = "Fuel level too low for launch";
+            faultFlag = true;
+        } else {
+            document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch";
+        }
+    } else {
+        //set bad fuel
+    }
+
+    if(validateInput(cargoLevel) === "Is a Number") {
+        if (cargoLevel > 10000) {
+            document.getElementById("cargoStatus").innerHTML = "Cargo mass too heavy for launch";
+            faultFlag = true;
+        } else {
+            document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch";
+        }
+    }
+    
+    if (faultFlag) {
+        list.style.visibility = "visible";
+        document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch";
+        document.getElementById("launchStatus").style = "color:red";
+    } else {
+        document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch";
+        document.getElementById("launchStatus").style = "color:green";
+
+    }
  }
  
  async function myFetch() {
