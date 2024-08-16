@@ -1,20 +1,17 @@
-// Write your helper functions here!
-
 require('cross-fetch/polyfill');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     document.getElementById("missionTarget").innerHTML = 
-    // Here is the HTML formatting for our mission target div.
     `
-                 <h2>Mission Destination</h2>
-                 <ol>
-                     <li>Name: ${name} </li>
-                     <li>Diameter: ${diameter} </li>
-                     <li>Star: ${star} </li>
-                     <li>Distance from Earth: ${distance} </li>
-                     <li>Number of Moons: ${moons} </li>
-                 </ol>
-                 <img src=${imageUrl}>
+        <h2>Mission Destination</h2>
+        <ol>
+            <li>Name: ${name} </li>
+            <li>Diameter: ${diameter} </li>
+            <li>Star: ${star} </li>
+            <li>Distance from Earth: ${distance} </li>
+            <li>Number of Moons: ${moons} </li>
+        </ol>
+        <img src=${imageUrl}>
     `
  }
  
@@ -30,17 +27,19 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let faultFlag = false;
+
     if (validateInput(pilot) === "Not a Number") {
         document.getElementById("pilotStatus").innerHTML = `Pilot ${pilot} is ready for launch`;
     } else {
-        //set bad pilot
+        alert("Make sure to enter valid information for each field! (pilot)");
+        return;
     }
 
     if (validateInput(copilot) === "Not a Number") {
         document.getElementById("copilotStatus").innerHTML = `Co-pilot ${copilot} is ready for launch`;
-
     } else {
-        //set bad copilot
+        alert("Make sure to enter valid information for each field! (copilot)");
+        return;
     }
 
     if (validateInput(fuelLevel) === "Is a Number") {
@@ -51,7 +50,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
             document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch";
         }
     } else {
-        //set bad fuel
+        alert("Make sure to enter valid information for each field! (fuel)");
+        return;
     }
 
     if(validateInput(cargoLevel) === "Is a Number") {
@@ -62,7 +62,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
             document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch";
         }
     } else {
-        //set bad cargo
+        alert("Make sure to enter valid information for each field! (cargo)");
+        return;
     }
     
     if (faultFlag) {
@@ -72,17 +73,14 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     } else {
         document.getElementById("launchStatus").innerHTML = "Shuttle is Ready for Launch";
         document.getElementById("launchStatus").style.color = "green";
-
     }
  }
  
  async function myFetch() {
     let planetsReturned;
-    
     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
         return response.json();
     });
- 
      return planetsReturned;
  }
  
